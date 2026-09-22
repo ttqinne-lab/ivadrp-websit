@@ -29,8 +29,8 @@
  if(copy)copy.addEventListener('click',async()=>{const text=document.getElementById('office-address')?.textContent||'';const feedback=document.querySelector('.copy-feedback');try{if(!navigator.clipboard?.writeText)throw new Error('unavailable');await navigator.clipboard.writeText(text);if(feedback)feedback.textContent='地址已複製';}catch{if(feedback)feedback.textContent='請選取上方地址複製';}},options);
  function mountYouTubeVideos(){
   if(!document.createElement)return;
-  const ids={index:'d-aqtJ_svpE',iva:'o2nhBiC5YQk',suitability:'IZ9-FS5KV_4',drp:'DBfUBbEJCDc',bankruptcy:'IAphzq_vKC8'};
-  const titles={index:'香港債務重組諮詢影片',iva:'IVA 債務重組影片',suitability:'IVA 適用情況影片',drp:'DRP 債務舒緩影片',bankruptcy:'破產諮詢影片'};
+  const ids={index:'BTBl0DaoxkE',iva:'ZNqUn9Han0Q',suitability:'j4_BAEc4fBg',drp:'suc43VsmbVU',bankruptcy:'rkDCMvHoK0s'};
+  const titles={index:'IVA／DRP 初步介紹影片',iva:'IVA 介紹影片',suitability:'IVA 適用情況影片',drp:'DRP 介紹影片',bankruptcy:'破產程序資訊影片'};
   const makeFrame=(id,title,loading='lazy')=>{
    const frame=document.createElement('iframe');
    frame.className='youtube-embed';
@@ -63,8 +63,8 @@
   });
   const services=document.getElementById('services');
   if(services){
-   const serviceVideos=[['o2nhBiC5YQk','IVA 債務重組影片'],['DBfUBbEJCDc','DRP 債務舒緩影片'],['IAphzq_vKC8','破產諮詢影片']];
-   [...services.querySelectorAll('.bg-white.rounded-card')].slice(0,3).forEach((card,index)=>{
+   const serviceVideos=[['ZNqUn9Han0Q','IVA 介紹影片'],['suc43VsmbVU','DRP 介紹影片']];
+   [...services.querySelectorAll('.bg-white.rounded-card')].slice(0,2).forEach((card,index)=>{
     const media=card.querySelector('div.h-48');
     if(!media)return;
     media.classList.remove('h-48');media.classList.add('service-video');
