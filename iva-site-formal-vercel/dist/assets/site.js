@@ -29,7 +29,7 @@
  if(copy)copy.addEventListener('click',async()=>{const text=document.getElementById('office-address')?.textContent||'';const feedback=document.querySelector('.copy-feedback');try{if(!navigator.clipboard?.writeText)throw new Error('unavailable');await navigator.clipboard.writeText(text);if(feedback)feedback.textContent='地址已複製';}catch{if(feedback)feedback.textContent='請選取上方地址複製';}},options);
  function mountYouTubeVideos(){
   if(!document.createElement)return;
-  const ids={index:'BTBl0DaoxkE',iva:'ZNqUn9Han0Q',suitability:'j4_BAEc4fBg',drp:'suc43VsmbVU',bankruptcy:'rkDCMvHoK0s'};
+  const ids={index:'1W6M76vCo1Q',iva:'tlsQ31IUC7s',suitability:'9Mx8edVN6_w',drp:'JJweE7UIUFw',bankruptcy:'9DhUYSV4-zk'};
   const titles={index:'IVA／DRP 初步介紹影片',iva:'IVA 介紹影片',suitability:'IVA 適用情況影片',drp:'DRP 介紹影片',bankruptcy:'破產程序資訊影片'};
   const makeFrame=(id,title,loading='lazy')=>{
    const frame=document.createElement('iframe');
@@ -63,7 +63,7 @@
   });
   const services=document.getElementById('services');
   if(services){
-   const serviceVideos=[['ZNqUn9Han0Q','IVA 介紹影片'],['suc43VsmbVU','DRP 介紹影片']];
+   const serviceVideos=[['tlsQ31IUC7s','IVA 介紹影片'],['JJweE7UIUFw','DRP 介紹影片']];
    [...services.querySelectorAll('.bg-white.rounded-card')].slice(0,2).forEach((card,index)=>{
     const media=card.querySelector('div.h-48');
     if(!media)return;
