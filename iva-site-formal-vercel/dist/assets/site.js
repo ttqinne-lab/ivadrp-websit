@@ -1,9 +1,42 @@
 (function(){
  'use strict';
+ const GA4_ID='G-8T9H7G1YG4';
+ function sendGA4Event(name){
+  if(typeof window.gtag==='function')window.gtag('event',name);
+ }
+ function sendGA4EventBeforeNavigation(name,navigate){
+  let completed=false;
+  const finish=()=>{if(completed)return;completed=true;navigate();};
+  if(typeof window.gtag!=='function'){finish();return;}
+  window.gtag('event',name,{transport_type:'beacon',event_callback:finish,event_timeout:800});
+  window.setTimeout(finish,900);
+ }
+ function initialiseGA4(){
+  if(window.__ivaGa4Initialised)return;
+  window.__ivaGa4Initialised=true;
+  window.dataLayer=window.dataLayer||[];
+  window.gtag=window.gtag||function(){window.dataLayer.push(arguments);};
+  window.gtag('js',new Date());
+  window.gtag('config',GA4_ID,{send_page_view:true});
+  const loader=document.createElement('script');
+  loader.async=true;
+  loader.src='https://www.googletagmanager.com/gtag/js?id='+GA4_ID;
+  loader.dataset.ga4Loader='true';
+  document.head.append(loader);
+ }
  if(typeof document==='undefined')return;
+ initialiseGA4();
+ window.ivaGa4={event:sendGA4Event,eventBeforeNavigation:sendGA4EventBeforeNavigation};
  window.ivaSiteCleanup?.();
  const controller=new AbortController(),options={signal:controller.signal};
  const observers=[];window.ivaSiteCleanup=()=>{controller.abort();observers.forEach(o=>o.disconnect());};
+ document.addEventListener('click',event=>{
+  const link=event.target instanceof Element?event.target.closest('a[href]'):null;
+  if(!link)return;
+  const href=link.getAttribute('href')||'';
+  if(/^tel:/i.test(href))sendGA4Event('phone_click');
+  else if(/(?:wa\.me|whatsapp\.com)/i.test(href))sendGA4Event('whatsapp_click');
+ },{capture:true,signal:controller.signal});
  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
  const toggle=document.getElementById('original-menu-toggle'),menu=document.getElementById('original-mobile-menu');
  function closeMenu(){if(menu)menu.hidden=true;if(toggle)toggle.setAttribute('aria-expanded','false');}

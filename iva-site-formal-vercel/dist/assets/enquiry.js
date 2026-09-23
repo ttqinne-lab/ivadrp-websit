@@ -41,6 +41,7 @@
   opener=trigger||document.activeElement;
   oldOverflow=document.body.style.overflow;
   dialog.showModal();
+  window.ivaGa4?.event('form_open');
   document.body.style.overflow='hidden';
   dialog.querySelector('select')?.focus();
  }
@@ -62,7 +63,12 @@
   formFields.forEach(key=>values[key]=form.elements[key]?.value||'');
   const targetURL=buildWhatsAppURL(values);
   dialog.close();
-  window.location.assign(targetURL);
+  const navigate=()=>window.location.assign(targetURL);
+  if(window.ivaGa4?.eventBeforeNavigation)window.ivaGa4.eventBeforeNavigation('form_submit',navigate);
+  else{
+   if(typeof window.gtag==='function')window.gtag('event','form_submit',{transport_type:'beacon'});
+   navigate();
+  }
  });
  if(location.hash==='#initial-enquiry')open();
 })();
